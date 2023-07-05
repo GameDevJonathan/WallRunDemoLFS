@@ -1,6 +1,7 @@
 using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 
@@ -15,10 +16,19 @@ public class Controller : MonoBehaviour
     private float verticalVelocity = 0f;
 
     [SerializeField] private float rotationSpeed = 11f;
+
+    [Tooltip("How Fast the player Moves")]
     [SerializeField] private float playerSpeed;
+
+    [Tooltip("Character Jump Height")]
+    [SerializeField] private float jumpHeight = 15f;
+
     private Vector3 playerMovement;
+
     [SerializeField] private Vector2 moveInput;
+
     [SerializeField] private Vector2 cameraRot;
+
     public Vector3 Movement => Vector3.up * verticalVelocity;
     Transform cam;
 
@@ -34,6 +44,9 @@ public class Controller : MonoBehaviour
 
     [Tooltip("Additional degress to override the camera. Useful for fine tuning camera position when locked")]
     public float CameraAngleOverride = 0.0f;
+
+    [Tooltip("Camera Rotation Speed")]
+    public float CameraRotationSpeed = 3f;
 
     [Tooltip("For locking the camera position on all axis")]
     public bool LockCameraPosition = false;
@@ -55,21 +68,28 @@ public class Controller : MonoBehaviour
 
     private void Update()
     {
-        Gravity();
         playerMovement = CalculateMovement();
+
         cameraRot.x = Input.GetAxis("RHorizontal");
+
         cameraRot.y = Input.GetAxis("RVertical");
 
         freeLookSpeed = playerMovement.magnitude;
+
         freeLookSpeed = Mathf.Clamp(freeLookSpeed, 0f, 1f);
+
         animator.SetFloat("Speed", freeLookSpeed);
         //Debug.Log(freeLookSpeed);
 
 
         isGrounded = controller.isGrounded;
+
         if (playerMovement != Vector3.zero)
             FaceMovement(playerMovement);
+
         controller.Move((playerMovement + Movement) * Time.deltaTime * playerSpeed);
+
+        JumpAndGravity();
 
 
     }
@@ -94,11 +114,23 @@ public class Controller : MonoBehaviour
             right * moveInput.x;
     }
 
-    private void Gravity()
+    private void JumpAndGravity()
     {
+
+        if (isGrounded)
+        {
+            if (Input.GetButtonDown("Fire2"))
+            {
+                verticalVelocity = Mathf.Sqrt(jumpHeight * -2f * Physics.gravity.y);
+            }
+        }
+
+
+
+
         if (verticalVelocity < 0f && controller.isGrounded)
         {
-            verticalVelocity = Physics.gravity.y * Time.deltaTime;
+            verticalVelocity = -2f;
         }
         else
         {
@@ -127,8 +159,8 @@ public class Controller : MonoBehaviour
         {
             float deltaTimeMultiplier = Time.deltaTime;
 
-            _cinemachineTargetYaw -= CameraValue.x;
-            _cinemachineTargetPitch -= CameraValue.y;
+            _cinemachineTargetYaw -= CameraValue.x * deltaTimeMultiplier * CameraRotationSpeed;
+            _cinemachineTargetPitch -= CameraValue.y * deltaTimeMultiplier * CameraRotationSpeed;
         }
 
         // clamp our rotations so our values are limited 360 degrees
