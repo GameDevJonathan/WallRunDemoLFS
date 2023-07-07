@@ -10,6 +10,9 @@ public class Controller : MonoBehaviour
     [SerializeField] CharacterController controller;
     [SerializeField] Animator animator;
     [SerializeField] private bool isGrounded;
+    [SerializeField] private bool isJumping;
+    [SerializeField] private bool canJump;
+    [SerializeField] private bool playerLock;
     [SerializeField] float freeLookSpeed;
 
 
@@ -68,6 +71,8 @@ public class Controller : MonoBehaviour
 
     private void Update()
     {
+        if (playerLock) return;
+
         playerMovement = CalculateMovement();
 
         cameraRot.x = Input.GetAxis("RHorizontal");
@@ -119,18 +124,37 @@ public class Controller : MonoBehaviour
 
         if (isGrounded)
         {
-            if (Input.GetButtonDown("Fire2"))
+            if (Input.GetButtonDown("Fire2") && canJump)
             {
-                verticalVelocity = Mathf.Sqrt(jumpHeight * -2f * Physics.gravity.y);
+                if (!isJumping)
+                {
+                    animator.Play("JumpStart");
+                    canJump = false;
+
+                }
             }
         }
 
 
 
 
-        if (verticalVelocity < 0f && controller.isGrounded)
+        if (verticalVelocity < 0f && controller.isGrounded && isJumping)
         {
             verticalVelocity = -2f;
+
+            if (playerMovement != Vector3.zero)
+            {
+                animator.Play("LandingRoll");
+                playerLock = true;
+                animator.applyRootMotion = true;
+            }
+            else
+            {
+                animator.Play("JumpEnd");
+                playerLock = true;
+            }
+            isJumping = false;
+
         }
         else
         {
@@ -171,6 +195,20 @@ public class Controller : MonoBehaviour
         CinemachineCameraTarget.transform.rotation = Quaternion.Euler(_cinemachineTargetPitch + CameraAngleOverride,
             _cinemachineTargetYaw, 0.0f);
 
+    }
+
+    public void AddForce()
+    {
+        verticalVelocity = Mathf.Sqrt(jumpHeight * -2f * Physics.gravity.y);
+        isJumping = true;
+    }
+
+    public void ReturnToMovement()
+    {
+        canJump = true;
+        playerLock = false;
+        animator.Play("Movement");
+        animator.applyRootMotion = false;
     }
 
 }

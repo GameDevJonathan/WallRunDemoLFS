@@ -2172,7 +2172,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh27984
+  m_Name: pb_Mesh28274
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -4860,6 +4860,9 @@ MonoBehaviour:
   controller: {fileID: 543450652708113725}
   animator: {fileID: 543450652708113727}
   isGrounded: 0
+  isJumping: 0
+  canJump: 0
+  playerLock: 0
   freeLookSpeed: 0
   rotationSpeed: 11
   playerSpeed: 3
@@ -9773,6 +9776,9 @@ MonoBehaviour:
   controller: {fileID: 6814165339451037521}
   animator: {fileID: 6814165339451037522}
   isGrounded: 0
+  isJumping: 0
+  canJump: 1
+  playerLock: 0
   freeLookSpeed: 0
   rotationSpeed: 11
   playerSpeed: 4
