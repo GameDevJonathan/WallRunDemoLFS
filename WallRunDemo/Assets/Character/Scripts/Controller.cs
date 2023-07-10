@@ -22,6 +22,8 @@ public class Controller : MonoBehaviour
 
     [Tooltip("How Fast the player Moves")]
     [SerializeField] private float playerSpeed;
+    [SerializeField] private float playerWalkSpeed;
+    [SerializeField] private float playerRunSpeed;
 
     [Tooltip("Character Jump Height")]
     [SerializeField] private float jumpHeight = 15f;
@@ -31,6 +33,9 @@ public class Controller : MonoBehaviour
     [SerializeField] private Vector2 moveInput;
 
     [SerializeField] private Vector2 cameraRot;
+
+    [Header("KeyBindings")]
+    public KeyCode sprintKey = KeyCode.LeftShift;
 
     public Vector3 Movement => Vector3.up * verticalVelocity;
     Transform cam;
@@ -60,7 +65,8 @@ public class Controller : MonoBehaviour
     private const float _threshold = 0.01f;
     private Vector2 CameraValue => cameraRot;
 
-
+    public enum MovementState { Grounded, Sprinting, Jumping, WallRun};
+    public MovementState state;
 
     private void Start()
     {
@@ -73,15 +79,24 @@ public class Controller : MonoBehaviour
     {
         if (playerLock) return;
 
-        playerMovement = CalculateMovement();
+        StateHandler();
+
+        switch (state)
+        {
+            case MovementState.Grounded:
+                playerMovement = CalculateMovement();
+                break;
+        }
+        
+        //playerMovement = CalculateMovement();
 
         cameraRot.x = Input.GetAxis("RHorizontal");
 
         cameraRot.y = Input.GetAxis("RVertical");
 
-        freeLookSpeed = playerMovement.magnitude;
+        //freeLookSpeed = playerMovement.magnitude;
 
-        freeLookSpeed = Mathf.Clamp(freeLookSpeed, 0f, 1f);
+        freeLookSpeed = Mathf.Clamp(freeLookSpeed, 0f, 2f);
 
         animator.SetFloat("Speed", freeLookSpeed);
         //Debug.Log(freeLookSpeed);
@@ -102,6 +117,37 @@ public class Controller : MonoBehaviour
     private void LateUpdate()
     {
         CameraRotation();
+    }
+
+    private void StateHandler()
+    {
+        //Mode - Sprinting
+        if(isGrounded && Input.GetKey(sprintKey) && playerMovement != Vector3.zero)
+        {
+            state = MovementState.Sprinting;
+            freeLookSpeed = 2f;
+            playerSpeed = playerRunSpeed;
+
+
+        }
+        else
+
+        //Mode - Grounded
+        if (controller.isGrounded)
+        {
+            state = MovementState.Grounded;
+            freeLookSpeed = playerMovement.magnitude;
+            playerSpeed = playerWalkSpeed;
+
+
+        }
+        //Mode - Jumping
+        else
+        {
+            state = MovementState.Jumping;
+        }
+        //todo add jumping
+
     }
 
     private Vector3 CalculateMovement()
