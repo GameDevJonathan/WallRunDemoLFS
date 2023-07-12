@@ -12,8 +12,11 @@ public class Controller : MonoBehaviour
     [SerializeField] private bool isGrounded;
     [SerializeField] private bool isJumping;
     [SerializeField] private bool canJump;
-    [SerializeField] private bool playerLock;
+    [SerializeField] public bool playerLock;
     [SerializeField] float freeLookSpeed;
+
+    [Header("WallRunning")]
+    public bool isWallrunning;
 
 
     private float verticalVelocity = 0f;
@@ -24,6 +27,7 @@ public class Controller : MonoBehaviour
     [SerializeField] private float playerSpeed;
     [SerializeField] private float playerWalkSpeed;
     [SerializeField] private float playerRunSpeed;
+    [SerializeField] private float jumpForce = 15f;
 
     [Tooltip("Character Jump Height")]
     [SerializeField] private float jumpHeight = 15f;
@@ -33,9 +37,8 @@ public class Controller : MonoBehaviour
     [SerializeField] private Vector2 moveInput;
 
     [SerializeField] private Vector2 cameraRot;
-
-    [Header("KeyBindings")]
-    public KeyCode sprintKey = KeyCode.LeftShift;
+    [SerializeField] public Transform raycastOrientation;
+    
 
     public Vector3 Movement => Vector3.up * verticalVelocity;
     Transform cam;
@@ -65,8 +68,7 @@ public class Controller : MonoBehaviour
     private const float _threshold = 0.01f;
     private Vector2 CameraValue => cameraRot;
 
-    public enum MovementState { Grounded, Sprinting, Jumping, WallRun};
-    public MovementState state;
+    
 
     private void Start()
     {
@@ -77,38 +79,38 @@ public class Controller : MonoBehaviour
 
     private void Update()
     {
-        if (playerLock) return;
-
-        StateHandler();
-
-        switch (state)
-        {
-            case MovementState.Grounded:
-                playerMovement = CalculateMovement();
-                break;
-        }
-        
-        //playerMovement = CalculateMovement();
-
         cameraRot.x = Input.GetAxis("RHorizontal");
-
         cameraRot.y = Input.GetAxis("RVertical");
+        isGrounded = controller.isGrounded;
+        
+        if (playerLock) return;
+        //sprinting = Input.GetButton("Fire1");
+        
 
-        //freeLookSpeed = playerMovement.magnitude;
+
+
+        //if(Input.GetButton("Fire1") && playerMovement != Vector3.zero)
+        //{
+        //    freeLookSpeed = 2f;
+        //    playerSpeed = playerRunSpeed;
+        //}
+        //else
+        //{
+            freeLookSpeed = playerMovement.magnitude;
+            playerSpeed = playerWalkSpeed;
+        //}
 
         freeLookSpeed = Mathf.Clamp(freeLookSpeed, 0f, 2f);
 
         animator.SetFloat("Speed", freeLookSpeed);
         //Debug.Log(freeLookSpeed);
 
-
-        isGrounded = controller.isGrounded;
-
         if (playerMovement != Vector3.zero)
             FaceMovement(playerMovement);
 
+        playerMovement = CalculateMovement();
         controller.Move((playerMovement + Movement) * Time.deltaTime * playerSpeed);
-
+        //controller.Move( ( (playerMovement * Time.deltaTime * playerSpeed) + Movement) );
         JumpAndGravity();
 
 
@@ -117,38 +119,7 @@ public class Controller : MonoBehaviour
     private void LateUpdate()
     {
         CameraRotation();
-    }
-
-    private void StateHandler()
-    {
-        //Mode - Sprinting
-        if(isGrounded && Input.GetKey(sprintKey) && playerMovement != Vector3.zero)
-        {
-            state = MovementState.Sprinting;
-            freeLookSpeed = 2f;
-            playerSpeed = playerRunSpeed;
-
-
-        }
-        else
-
-        //Mode - Grounded
-        if (controller.isGrounded)
-        {
-            state = MovementState.Grounded;
-            freeLookSpeed = playerMovement.magnitude;
-            playerSpeed = playerWalkSpeed;
-
-
-        }
-        //Mode - Jumping
-        else
-        {
-            state = MovementState.Jumping;
-        }
-        //todo add jumping
-
-    }
+    }   
 
     private Vector3 CalculateMovement()
     {
@@ -211,9 +182,14 @@ public class Controller : MonoBehaviour
     private void FaceMovement(Vector3 movement)
     {
 
-        this.transform.rotation =
+        transform.rotation =
             Quaternion.Lerp(this.transform.rotation,
             Quaternion.LookRotation(movement), Time.deltaTime * rotationSpeed);
+
+        raycastOrientation.rotation = transform.rotation;
+           
+
+
     }
 
     private static float ClampAngle(float lfAngle, float lfMin, float lfMax)
@@ -246,6 +222,7 @@ public class Controller : MonoBehaviour
     public void AddForce()
     {
         verticalVelocity = Mathf.Sqrt(jumpHeight * -2f * Physics.gravity.y);
+        //verticalVelocity = jumpForce;
         isJumping = true;
     }
 
@@ -256,5 +233,7 @@ public class Controller : MonoBehaviour
         animator.Play("Movement");
         animator.applyRootMotion = false;
     }
+
+   
 
 }
