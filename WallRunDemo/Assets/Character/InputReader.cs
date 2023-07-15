@@ -11,7 +11,11 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
 
     private Controls controls;
 
+    public bool Modified;
+
     public bool JumpButtonPressed => controls.Player.Jump.WasPressedThisFrame();
+
+    public event Action JumpEvent;
 
 
     //camera    
@@ -57,17 +61,27 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
     public void OnMove(InputAction.CallbackContext context)
     {
         MovementValue = context.ReadValue<Vector2>();
-        Debug.Log(MovementValue);
+        
     }
 
     public void OnJump(InputAction.CallbackContext context)
     {
-        throw new NotImplementedException();
+        if(!context.performed) { return; }
+        JumpEvent?.Invoke();
     }
 
     public void OnModifier(InputAction.CallbackContext context)
     {
-        throw new NotImplementedException();
+        if (context.performed)
+        {
+            Modified = true;
+        }
+        else if(context.canceled)
+        {
+            Modified = false;
+        }
+
+        Debug.Log("Modified: " + Modified);
     }
 
     public void OnCamera(InputAction.CallbackContext context)
