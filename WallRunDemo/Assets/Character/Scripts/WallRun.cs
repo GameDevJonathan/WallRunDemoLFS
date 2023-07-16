@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Rendering;
 using UnityEngine;
 
 public class WallRun : MonoBehaviour
@@ -16,34 +17,48 @@ public class WallRun : MonoBehaviour
     [Header("Input")]
     public InputReader inputReader;
 
-    [field:Header("Detection")]
+    [Header("Detection")]
     public float wallCheckDistance;
     public float minJumpHeight;
-    private RaycastHit leftWallHit;
-    private RaycastHit rightWallHit;
-    private bool wallLeft;
-    private bool wallRight;
+    [SerializeField] public RaycastHit leftWallHit;
+    [SerializeField] public RaycastHit rightWallHit;
+    public bool wallLeft;
+    public bool wallRight;
 
     [Header("References")]
     public Transform orientation;
     public CharacterController characterController;
+    public Rigidbody rb;
+
+    private void Start()
+    {
+        rb = GetComponent<Rigidbody>();
+    }
 
     public void Update()
     {
         CheckForWall();
+        
+        
     }
 
     public void CheckForWall()
     {
-        wallRight = Physics.Raycast(transform.position, orientation.right, out rightWallHit, whatIsWall);
-        Debug.DrawRay(transform.position, orientation.right * wallCheckDistance, Color.blue);
-        wallLeft = Physics.Raycast(transform.position, -orientation.right, out leftWallHit, whatIsWall);
-        Debug.DrawRay(transform.position, -orientation.right * wallCheckDistance, Color.red);
+        
+        wallRight = Physics.Raycast(orientation.position, orientation.right, out rightWallHit,wallCheckDistance, whatIsWall);
+        Debug.DrawRay(orientation.position, orientation.right * wallCheckDistance, Color.blue);
+        
+        
+        wallLeft = Physics.Raycast(orientation.position, -orientation.right, out leftWallHit,wallCheckDistance, whatIsWall);
+        Debug.DrawRay(orientation.position, -orientation.right * wallCheckDistance, Color.red);
+        
+        
         Debug.DrawRay(transform.position, Vector3.down * minJumpHeight, Color.magenta);
     }
 
     public bool AboveGround()
     {
+
         return !Physics.Raycast(transform.position, Vector3.down, minJumpHeight, whatIsGround);
     }
 
@@ -53,6 +68,25 @@ public class WallRun : MonoBehaviour
             return true;
         else
             return false;
+    }
+
+    public void WallRunningMovement()
+    {        
+        
+        Vector3 walllNormal = wallRight ? rightWallHit.normal : leftWallHit.normal;
+
+        Vector3 wallForward = Vector3.Cross(walllNormal, transform.up);
+
+        if ((orientation.forward - wallForward).magnitude > (orientation.forward - -wallForward).magnitude)
+            wallForward = -wallForward;        
+        
+        characterController.Move(wallForward * wallRunForce * Time.deltaTime);
+        //push to wall
+        
+        if(!(wallLeft && inputReader.MovementValue.x > 0) && !(wallRight && inputReader.MovementValue.x < 0))
+        {
+            characterController.Move(-walllNormal * 100 * Time.deltaTime);
+        }
     }
 
 

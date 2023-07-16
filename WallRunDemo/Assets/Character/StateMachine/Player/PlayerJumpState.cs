@@ -37,6 +37,9 @@ public class PlayerJumpState : PlayerBaseState
 
         if(stateMachine.WallRun.AboveGround() && stateMachine.WallRun.HitWall())
         {
+            Debug.Log(stateMachine.WallRun.HitWall());
+            //Debug.Log(stateMachine.WallRun.AboveGround());
+
             if(stateMachine.InputReader.MovementValue.y > 0)
             {
                 Debug.Log("Can Enter Wall Run State");

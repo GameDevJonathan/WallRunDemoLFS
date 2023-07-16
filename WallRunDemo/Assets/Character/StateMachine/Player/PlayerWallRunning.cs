@@ -12,7 +12,29 @@ public class PlayerWallRunning : PlayerBaseState
     public override void Enter()
     {
         stateMachine.ForceReceiver.Reset();
-        stateMachine.Animator.Play("WallRun");
+        if (stateMachine.WallRun.wallLeft)
+        {
+            stateMachine.Animator.Play("WallRunL");
+        }
+
+        if (stateMachine.WallRun.wallRight)
+        {
+            stateMachine.Animator.Play("WallRunR");
+        }
+
+
+    }
+    public override void Tick(float deltaTime)
+    {
+        if(stateMachine.InputReader.MovementValue.y > 0)
+        {
+            stateMachine.WallRun.WallRunningMovement();
+        }
+        else
+        {
+            stateMachine.SwitchState(new PlayerFallState(stateMachine));
+            return;
+        }
         
     }
 
@@ -21,8 +43,4 @@ public class PlayerWallRunning : PlayerBaseState
         
     }
 
-    public override void Tick(float deltaTime)
-    {
-        
-    }
 }
