@@ -34,6 +34,17 @@ public class PlayerJumpState : PlayerBaseState
             stateMachine.SwitchState(new PlayerFallState(stateMachine));
             return;
         }
+
+        if(stateMachine.WallRun.AboveGround() && stateMachine.WallRun.HitWall())
+        {
+            if(stateMachine.InputReader.MovementValue.y > 0)
+            {
+                Debug.Log("Can Enter Wall Run State");
+                stateMachine.SwitchState(new PlayerWallRunning(stateMachine));
+                return;
+
+            }
+        }
         
     }
 

@@ -5,10 +5,6 @@ using UnityEngine;
 public class StateMachine : MonoBehaviour
 {
     private State currentState;
-
-   
-   
-
     private void Update()
     {
         Debug.Log(currentState);

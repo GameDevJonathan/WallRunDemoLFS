@@ -9,38 +9,41 @@ public class Grounded : PlayerBaseState
     public float AnimatorDampTime = 0.05f;
     private float freeLookValue = 1;
     private float freeLookMoveSpeed;
-    //private bool shouldFade;
-    private const float CrossFadeDuration = 0.3f;
+    private bool shouldFade;
+    private const float CrossFadeDuration = 0.1f;
 
-    public Grounded(PlayerStateMachine stateMachine) : base(stateMachine)
+    public Grounded(PlayerStateMachine stateMachine, bool shouldFade = false) : base(stateMachine)
     {
         this.freeLookMoveSpeed = stateMachine.FreeLookMovementSpeed;
+        this.shouldFade = shouldFade;
     }
 
     public override void Enter()
     {
-        stateMachine.Animator.Play(FreeLookBlendTreeHash);
-        stateMachine.InputReader.JumpEvent += OnJump;
+        if (!shouldFade)
+            stateMachine.Animator.Play(FreeLookBlendTreeHash);
+        else
+            stateMachine.Animator.CrossFadeInFixedTime(FreeLookBlendTreeHash, CrossFadeDuration);
         
+        stateMachine.InputReader.JumpEvent += OnJump;
+
     }
 
     public override void Tick(float deltaTime)
     {
-        
-
 
         if (stateMachine.InputReader.Modified)
         {
-            Debug.Log("Grounded State:: input reader value: " + stateMachine.InputReader.Modified);
+            //Debug.Log("Grounded State:: input reader value: " + stateMachine.InputReader.Modified);
         }
         else
         {
-            Debug.Log("Grounded State:: input reader value: " + stateMachine.InputReader.Modified);
+            //Debug.Log("Grounded State:: input reader value: " + stateMachine.InputReader.Modified);
         }
         Vector3 movement = CalculateMovement();
         Move(movement * freeLookMoveSpeed, deltaTime);
 
-        
+
         if (stateMachine.InputReader.MovementValue == Vector2.zero)
         {
             stateMachine.Animator.SetFloat(FreeLookSpeedHash, 0, AnimatorDampTime, deltaTime);
@@ -48,8 +51,7 @@ public class Grounded : PlayerBaseState
         }
 
 
-        
-        stateMachine.Animator.SetFloat(FreeLookSpeedHash,freeLookValue,AnimatorDampTime,deltaTime);
+        stateMachine.Animator.SetFloat(FreeLookSpeedHash, freeLookValue, AnimatorDampTime, deltaTime);
         FaceMovement(movement, deltaTime);
 
 
@@ -64,7 +66,7 @@ public class Grounded : PlayerBaseState
     public override void Exit()
     {
         stateMachine.InputReader.JumpEvent -= OnJump;
-        
+
     }
 
     private Vector3 CalculateMovement()
@@ -77,7 +79,7 @@ public class Grounded : PlayerBaseState
         forward.Normalize();
         right.Normalize();
 
-        
+
 
         return forward * stateMachine.InputReader.MovementValue.y +
                right * stateMachine.InputReader.MovementValue.x;

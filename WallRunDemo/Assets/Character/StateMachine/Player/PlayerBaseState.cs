@@ -50,7 +50,7 @@ public abstract class PlayerBaseState : State
 
     protected void ReturnToLocomotion()
     {
-        stateMachine.SwitchState(new Grounded(stateMachine));
+        stateMachine.SwitchState(new Grounded(stateMachine, true));
         if (stateMachine.Animator.applyRootMotion)
         {
             stateMachine.Animator.applyRootMotion = false;
