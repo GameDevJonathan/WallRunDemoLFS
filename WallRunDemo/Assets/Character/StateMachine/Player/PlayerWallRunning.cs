@@ -32,8 +32,11 @@ public class PlayerWallRunning : PlayerBaseState
         }
         else
         {
+
+            //stateMachine.CharacterController.Move(Vector3.zero);
+            stateMachine.ForceReceiver.Reset();
             stateMachine.SwitchState(new PlayerFallState(stateMachine));
-            return;
+            
         }
         
     }

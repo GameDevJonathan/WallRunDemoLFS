@@ -28,12 +28,8 @@ public class WallRun : MonoBehaviour
     [Header("References")]
     public Transform orientation;
     public CharacterController characterController;
-    public Rigidbody rb;
 
-    private void Start()
-    {
-        rb = GetComponent<Rigidbody>();
-    }
+    
 
     public void Update()
     {
@@ -76,6 +72,7 @@ public class WallRun : MonoBehaviour
         Vector3 walllNormal = wallRight ? rightWallHit.normal : leftWallHit.normal;
 
         Vector3 wallForward = Vector3.Cross(walllNormal, transform.up);
+       
 
         if ((orientation.forward - wallForward).magnitude > (orientation.forward - -wallForward).magnitude)
             wallForward = -wallForward;        

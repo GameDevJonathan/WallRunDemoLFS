@@ -53,7 +53,7 @@ public class PlayerJumpState : PlayerBaseState
 
     public override void Exit()
     {
-        
+        stateMachine.ForceReceiver.Reset();
     }
 
     private Vector3 CalculateMovement()
