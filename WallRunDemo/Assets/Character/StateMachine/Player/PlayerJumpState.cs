@@ -5,18 +5,24 @@ using UnityEngine;
 public class PlayerJumpState : PlayerBaseState
 {
     private readonly int JumpHash = Animator.StringToHash("JumpStart");
+    private readonly int WallJumpHash = Animator.StringToHash("WallJump");
     private const float CrossFadeDuration = 0.1f;
-    private Vector3 Momentum;
-    public PlayerJumpState(PlayerStateMachine stateMachine) : base(stateMachine)
+    private Vector3 Momentum;    
+    public PlayerJumpState(PlayerStateMachine stateMachine ) : base(stateMachine)
     {
+        
     }
 
     public override void Enter()
     {
+
         stateMachine.ForceReceiver.Jump(stateMachine.JumpForce);
         Momentum = stateMachine.CharacterController.velocity;
         Momentum.y = 0f;
         stateMachine.Animator.CrossFadeInFixedTime(JumpHash,CrossFadeDuration);
+        
+       
+
         
     }
     public override void Tick(float deltaTime)
@@ -70,6 +76,22 @@ public class PlayerJumpState : PlayerBaseState
 
         return forward * stateMachine.InputReader.MovementValue.y +
                right * stateMachine.InputReader.MovementValue.x;
+    }
+
+    public void WallJump()
+    {
+        Vector3 wallNormal = stateMachine.WallRun.wallRight ? 
+            stateMachine.WallRun.rightWallHit.normal : stateMachine.WallRun.leftWallHit.normal;
+
+        //Vector3 wallForward = Vector3.Cross(wallNormal, transform.up);
+
+        //if ((orientation.forward - wallForward).magnitude > (orientation.forward - -wallForward).magnitude)
+        //    wallForward = -wallForward;
+
+        Vector3 Velocity = new Vector3(stateMachine.CharacterController.velocity.x, 0f, stateMachine.CharacterController.velocity.z);
+        Vector3 forceToApply = stateMachine.transform.up * stateMachine.WallRun.wallJumpForce + wallNormal * stateMachine.WallRun.wallJumpSideForce;
+
+        
     }
 
 

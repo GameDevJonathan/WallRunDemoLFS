@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: cd17a9873511f184b813330b43b38634
+guid: 1964fc6ed566dd24c94f32fc3079c25a
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable:
@@ -293,186 +293,189 @@ ModelImporter:
     second: foot_r
   - first:
       1: 100192
-    second: Grruzam_Base_Modeling
+    second: Grru_Katana
   - first:
       1: 100194
-    second: hand_l
+    second: Grruzam_Base_Modeling
   - first:
       1: 100196
-    second: hand_r
+    second: hand_l
   - first:
       1: 100198
-    second: head
+    second: hand_r
   - first:
       1: 100200
-    second: ik_foot_l
+    second: head
   - first:
       1: 100202
-    second: ik_foot_r
+    second: ik_foot_l
   - first:
       1: 100204
-    second: ik_foot_root
+    second: ik_foot_r
   - first:
       1: 100206
-    second: ik_hand_gun
+    second: ik_foot_root
   - first:
       1: 100208
-    second: ik_hand_l
+    second: ik_hand_gun
   - first:
       1: 100210
-    second: ik_hand_r
+    second: ik_hand_l
   - first:
       1: 100212
-    second: ik_hand_root
+    second: ik_hand_r
   - first:
       1: 100214
-    second: IK_Weapon_R_Bone
+    second: ik_hand_root
   - first:
       1: 100216
-    second: index_01_l
+    second: IK_Weapon_R_Bone
   - first:
       1: 100218
-    second: index_01_r
+    second: index_01_l
   - first:
       1: 100220
-    second: index_02_l
+    second: index_01_r
   - first:
       1: 100222
-    second: index_02_r
+    second: index_02_l
   - first:
       1: 100224
-    second: index_03_l
+    second: index_02_r
   - first:
       1: 100226
-    second: index_03_r
+    second: index_03_l
   - first:
       1: 100228
-    second: lowerarm_l
+    second: index_03_r
   - first:
       1: 100230
-    second: lowerarm_r
+    second: lowerarm_l
   - first:
       1: 100232
-    second: lowerarm_twist_01_l
+    second: lowerarm_r
   - first:
       1: 100234
-    second: lowerarm_twist_01_r
+    second: lowerarm_twist_01_l
   - first:
       1: 100236
-    second: //RootNode
+    second: lowerarm_twist_01_r
   - first:
       1: 100238
-    second: middle_01_l
+    second: //RootNode
   - first:
       1: 100240
-    second: middle_01_r
+    second: middle_01_l
   - first:
       1: 100242
-    second: middle_02_l
+    second: middle_01_r
   - first:
       1: 100244
-    second: middle_02_r
+    second: middle_02_l
   - first:
       1: 100246
-    second: middle_03_l
+    second: middle_02_r
   - first:
       1: 100248
-    second: middle_03_r
+    second: middle_03_l
   - first:
       1: 100250
-    second: neck_01
+    second: middle_03_r
   - first:
       1: 100252
-    second: pelvis
+    second: neck_01
   - first:
       1: 100254
-    second: pinky_01_l
+    second: pelvis
   - first:
       1: 100256
-    second: pinky_01_r
+    second: pinky_01_l
   - first:
       1: 100258
-    second: pinky_02_l
+    second: pinky_01_r
   - first:
       1: 100260
-    second: pinky_02_r
+    second: pinky_02_l
   - first:
       1: 100262
-    second: pinky_03_l
+    second: pinky_02_r
   - first:
       1: 100264
-    second: pinky_03_r
+    second: pinky_03_l
   - first:
       1: 100266
-    second: ring_01_l
+    second: pinky_03_r
   - first:
       1: 100268
-    second: ring_01_r
+    second: ring_01_l
   - first:
       1: 100270
-    second: ring_02_l
+    second: ring_01_r
   - first:
       1: 100272
-    second: ring_02_r
+    second: ring_02_l
   - first:
       1: 100274
-    second: ring_03_l
+    second: ring_02_r
   - first:
       1: 100276
-    second: ring_03_r
+    second: ring_03_l
   - first:
       1: 100278
-    second: root
+    second: ring_03_r
   - first:
       1: 100280
-    second: spine_01
+    second: root
   - first:
       1: 100282
-    second: spine_02
+    second: spine_01
   - first:
       1: 100284
-    second: spine_03
+    second: spine_02
   - first:
       1: 100286
-    second: thigh_l
+    second: spine_03
   - first:
       1: 100288
-    second: thigh_r
+    second: thigh_l
   - first:
       1: 100290
-    second: thigh_twist_01_l
+    second: thigh_r
   - first:
       1: 100292
-    second: thigh_twist_01_r
+    second: thigh_twist_01_l
   - first:
       1: 100294
-    second: thumb_01_l
+    second: thigh_twist_01_r
   - first:
       1: 100296
-    second: thumb_01_r
+    second: thumb_01_l
   - first:
       1: 100298
-    second: thumb_02_l
+    second: thumb_01_r
   - first:
       1: 100300
-    second: thumb_02_r
+    second: thumb_02_l
   - first:
       1: 100302
-    second: thumb_03_l
+    second: thumb_02_r
   - first:
       1: 100304
-    second: thumb_03_r
+    second: thumb_03_l
   - first:
       1: 100306
-    second: upperarm_l
+    second: thumb_03_r
   - first:
       1: 100308
-    second: upperarm_r
+    second: upperarm_l
   - first:
       1: 100310
-    second: upperarm_twist_01_l
+    second: upperarm_r
   - first:
       1: 100312
+    second: upperarm_twist_01_l
+  - first:
+      1: 100314
     second: upperarm_twist_01_r
   - first:
       4: 400000
@@ -764,186 +767,189 @@ ModelImporter:
     second: foot_r
   - first:
       4: 400192
-    second: Grruzam_Base_Modeling
+    second: Grru_Katana
   - first:
       4: 400194
-    second: hand_l
+    second: Grruzam_Base_Modeling
   - first:
       4: 400196
-    second: hand_r
+    second: hand_l
   - first:
       4: 400198
-    second: head
+    second: hand_r
   - first:
       4: 400200
-    second: ik_foot_l
+    second: head
   - first:
       4: 400202
-    second: ik_foot_r
+    second: ik_foot_l
   - first:
       4: 400204
-    second: ik_foot_root
+    second: ik_foot_r
   - first:
       4: 400206
-    second: ik_hand_gun
+    second: ik_foot_root
   - first:
       4: 400208
-    second: ik_hand_l
+    second: ik_hand_gun
   - first:
       4: 400210
-    second: ik_hand_r
+    second: ik_hand_l
   - first:
       4: 400212
-    second: ik_hand_root
+    second: ik_hand_r
   - first:
       4: 400214
-    second: IK_Weapon_R_Bone
+    second: ik_hand_root
   - first:
       4: 400216
-    second: index_01_l
+    second: IK_Weapon_R_Bone
   - first:
       4: 400218
-    second: index_01_r
+    second: index_01_l
   - first:
       4: 400220
-    second: index_02_l
+    second: index_01_r
   - first:
       4: 400222
-    second: index_02_r
+    second: index_02_l
   - first:
       4: 400224
-    second: index_03_l
+    second: index_02_r
   - first:
       4: 400226
-    second: index_03_r
+    second: index_03_l
   - first:
       4: 400228
-    second: lowerarm_l
+    second: index_03_r
   - first:
       4: 400230
-    second: lowerarm_r
+    second: lowerarm_l
   - first:
       4: 400232
-    second: lowerarm_twist_01_l
+    second: lowerarm_r
   - first:
       4: 400234
-    second: lowerarm_twist_01_r
+    second: lowerarm_twist_01_l
   - first:
       4: 400236
-    second: //RootNode
+    second: lowerarm_twist_01_r
   - first:
       4: 400238
-    second: middle_01_l
+    second: //RootNode
   - first:
       4: 400240
-    second: middle_01_r
+    second: middle_01_l
   - first:
       4: 400242
-    second: middle_02_l
+    second: middle_01_r
   - first:
       4: 400244
-    second: middle_02_r
+    second: middle_02_l
   - first:
       4: 400246
-    second: middle_03_l
+    second: middle_02_r
   - first:
       4: 400248
-    second: middle_03_r
+    second: middle_03_l
   - first:
       4: 400250
-    second: neck_01
+    second: middle_03_r
   - first:
       4: 400252
-    second: pelvis
+    second: neck_01
   - first:
       4: 400254
-    second: pinky_01_l
+    second: pelvis
   - first:
       4: 400256
-    second: pinky_01_r
+    second: pinky_01_l
   - first:
       4: 400258
-    second: pinky_02_l
+    second: pinky_01_r
   - first:
       4: 400260
-    second: pinky_02_r
+    second: pinky_02_l
   - first:
       4: 400262
-    second: pinky_03_l
+    second: pinky_02_r
   - first:
       4: 400264
-    second: pinky_03_r
+    second: pinky_03_l
   - first:
       4: 400266
-    second: ring_01_l
+    second: pinky_03_r
   - first:
       4: 400268
-    second: ring_01_r
+    second: ring_01_l
   - first:
       4: 400270
-    second: ring_02_l
+    second: ring_01_r
   - first:
       4: 400272
-    second: ring_02_r
+    second: ring_02_l
   - first:
       4: 400274
-    second: ring_03_l
+    second: ring_02_r
   - first:
       4: 400276
-    second: ring_03_r
+    second: ring_03_l
   - first:
       4: 400278
-    second: root
+    second: ring_03_r
   - first:
       4: 400280
-    second: spine_01
+    second: root
   - first:
       4: 400282
-    second: spine_02
+    second: spine_01
   - first:
       4: 400284
-    second: spine_03
+    second: spine_02
   - first:
       4: 400286
-    second: thigh_l
+    second: spine_03
   - first:
       4: 400288
-    second: thigh_r
+    second: thigh_l
   - first:
       4: 400290
-    second: thigh_twist_01_l
+    second: thigh_r
   - first:
       4: 400292
-    second: thigh_twist_01_r
+    second: thigh_twist_01_l
   - first:
       4: 400294
-    second: thumb_01_l
+    second: thigh_twist_01_r
   - first:
       4: 400296
-    second: thumb_01_r
+    second: thumb_01_l
   - first:
       4: 400298
-    second: thumb_02_l
+    second: thumb_01_r
   - first:
       4: 400300
-    second: thumb_02_r
+    second: thumb_02_l
   - first:
       4: 400302
-    second: thumb_03_l
+    second: thumb_02_r
   - first:
       4: 400304
-    second: thumb_03_r
+    second: thumb_03_l
   - first:
       4: 400306
-    second: upperarm_l
+    second: thumb_03_r
   - first:
       4: 400308
-    second: upperarm_r
+    second: upperarm_l
   - first:
       4: 400310
-    second: upperarm_twist_01_l
+    second: upperarm_r
   - first:
       4: 400312
+    second: upperarm_twist_01_l
+  - first:
+      4: 400314
     second: upperarm_twist_01_r
   - first:
       21: 2100000
@@ -952,11 +958,23 @@ ModelImporter:
       21: 2100002
     second: Grruzam_glass_mtl
   - first:
+      21: 2100004
+    second: GrruzamWeapon_mtl
+  - first:
+      23: 2300000
+    second: Grru_Katana
+  - first:
+      33: 3300000
+    second: Grru_Katana
+  - first:
       43: 4300000
     second: Grruzam_Base_Modeling
   - first:
+      43: 4300002
+    second: Grru_Katana
+  - first:
       74: 7400000
-    second: Double_Jump_End_ZeroHeight
+    second: Double_Jump_End
   - first:
       95: 9500000
     second: //RootNode
@@ -978,14 +996,14 @@ ModelImporter:
     resampleCurves: 1
     optimizeGameObjects: 0
     removeConstantScaleCurves: 0
-    motionNodeName: <Root Transform>
+    motionNodeName: 
     rigImportErrors: 
     rigImportWarnings: "Copied Avatar Rig Configuration mis-match. Bone length in
       copied configuration does not match position in animation file:\n\t'thigh_l'
-      : position error = 7.908444 mm\n\t'calf_l' : position error = 19.590725 mm\n\t'foot_l'
-      : position error = 3.379817 mm\n\t'ball_l' : position error = 4.160104 mm\n\t'thigh_r'
-      : position error = 7.350205 mm\n\t'calf_r' : position error = 8.377732 mm\n\t'foot_r'
-      : position error = 9.499909 mm\n\t'ball_r' : position error = 4.612215 mm\n"
+      : position error = 7.908388 mm\n\t'calf_l' : position error = 19.590796 mm\n\t'foot_l'
+      : position error = 3.379724 mm\n\t'ball_l' : position error = 4.160061 mm\n\t'thigh_r'
+      : position error = 7.350053 mm\n\t'calf_r' : position error = 8.374602 mm\n\t'foot_r'
+      : position error = 9.499618 mm\n\t'ball_r' : position error = 4.612168 mm\n"
     animationImportErrors: 
     animationImportWarnings: "\nClip 'Take 001' has import animation warnings that
       might lower retargeting quality:\nNote: Activate translation DOF on avatar
@@ -1005,10 +1023,10 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Double_Jump_End_ZeroHeight
+      name: Double_Jump_End
       takeName: Take 001
       internalID: 0
-      firstFrame: 0
+      firstFrame: 2
       lastFrame: 38
       wrapMode: 0
       orientationOffsetY: 0
@@ -1018,10 +1036,10 @@ ModelImporter:
       hasAdditiveReferencePose: 0
       loopTime: 0
       loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
+      loopBlendOrientation: 1
+      loopBlendPositionY: 1
       loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
+      keepOriginalOrientation: 1
       keepOriginalPositionY: 1
       keepOriginalPositionXZ: 0
       heightFromFeet: 0
@@ -1203,7 +1221,7 @@ ModelImporter:
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
-    secondaryUVMarginMethod: 0
+    secondaryUVMarginMethod: 1
     secondaryUVMinLightmapResolution: 40
     secondaryUVMinObjectScale: 1
     secondaryUVPackMargin: 4

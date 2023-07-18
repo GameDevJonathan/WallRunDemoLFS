@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEditor.Rendering;
 using UnityEngine;
 
@@ -14,10 +15,17 @@ public class WallRun : MonoBehaviour
     public float maxWallRunTime;
     public float wallRunTimer;
 
+    public float wallJumpForce;
+    public float wallJumpSideForce;
+    public float wallJumpForwardForce;
+    [SerializeField,Range(0f,2f)]
+    private float lastJumpTime;
+
     [Header("Input")]
     public InputReader inputReader;
 
     [Header("Detection")]
+    public float RotationSmoothValue; 
     public float wallCheckDistance;
     public float minJumpHeight;
     [SerializeField] public RaycastHit leftWallHit;
@@ -28,27 +36,37 @@ public class WallRun : MonoBehaviour
     [Header("References")]
     public Transform orientation;
     public CharacterController characterController;
-
+    public PlayerStateMachine playerStateMachine;
     
+    
+
+    public void Start()
+    {
+        Debug.Log(characterController.attachedRigidbody);  
+
+    }
+
 
     public void Update()
     {
         CheckForWall();
-        
-        
+        if(lastJumpTime > 0f)
+        {
+            lastJumpTime -= Time.deltaTime;
+        }
     }
 
     public void CheckForWall()
     {
-        
-        wallRight = Physics.Raycast(orientation.position, orientation.right, out rightWallHit,wallCheckDistance, whatIsWall);
+
+        wallRight = Physics.Raycast(orientation.position, orientation.right, out rightWallHit, wallCheckDistance, whatIsWall);
         Debug.DrawRay(orientation.position, orientation.right * wallCheckDistance, Color.blue);
-        
-        
-        wallLeft = Physics.Raycast(orientation.position, -orientation.right, out leftWallHit,wallCheckDistance, whatIsWall);
+
+
+        wallLeft = Physics.Raycast(orientation.position, -orientation.right, out leftWallHit, wallCheckDistance, whatIsWall);
         Debug.DrawRay(orientation.position, -orientation.right * wallCheckDistance, Color.red);
-        
-        
+
+
         Debug.DrawRay(transform.position, Vector3.down * minJumpHeight, Color.magenta);
     }
 
@@ -60,31 +78,57 @@ public class WallRun : MonoBehaviour
 
     public bool HitWall()
     {
-        if (wallLeft || wallRight)
+        if (lastJumpTime <=0 && (wallLeft || wallRight))
             return true;
         else
             return false;
     }
 
     public void WallRunningMovement()
-    {        
-        
-        Vector3 walllNormal = wallRight ? rightWallHit.normal : leftWallHit.normal;
+    {
 
-        Vector3 wallForward = Vector3.Cross(walllNormal, transform.up);
-       
+        Vector3 wallNormal = wallRight ? rightWallHit.normal : leftWallHit.normal;
+
+        Vector3 wallForward = Vector3.Cross(wallNormal, transform.up);
+
 
         if ((orientation.forward - wallForward).magnitude > (orientation.forward - -wallForward).magnitude)
-            wallForward = -wallForward;        
-        
+            wallForward = -wallForward;
+
         characterController.Move(wallForward * wallRunForce * Time.deltaTime);
         //push to wall
-        
-        if(!(wallLeft && inputReader.MovementValue.x > 0) && !(wallRight && inputReader.MovementValue.x < 0))
-        {
-            characterController.Move(-walllNormal * 100 * Time.deltaTime);
-        }
+        characterController.Move(-wallNormal * 100 * Time.deltaTime);
+        FaceMovement(wallForward, Time.deltaTime);        
     }
 
+   
 
+    protected void FaceMovement(Vector3 movement, float deltatime)
+    {
+        transform.rotation =
+            Quaternion.Lerp(transform.rotation,
+            Quaternion.LookRotation(movement),
+            deltatime * RotationSmoothValue);
+    }
+
+    public  void ResetWallJumpTime()
+    {
+        lastJumpTime = 1.5f;
+    }
+
+    public Vector3 WallJump()
+    {
+        Vector3 wallNormal = wallRight ? rightWallHit.normal : leftWallHit.normal;
+
+        Vector3 wallForward = Vector3.Cross(wallNormal, transform.up);
+
+
+        if ((orientation.forward - wallForward).magnitude > (orientation.forward - -wallForward).magnitude)
+            wallForward = -wallForward;
+
+
+        Vector3 ForceTopApply =  wallForward * wallJumpForwardForce + wallNormal * wallJumpSideForce;
+
+        return ForceTopApply;
+    }
 }

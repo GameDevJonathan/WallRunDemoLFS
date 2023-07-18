@@ -29,6 +29,15 @@ public class PlayerWallRunning : PlayerBaseState
         if(stateMachine.InputReader.MovementValue.y > 0)
         {
             stateMachine.WallRun.WallRunningMovement();
+
+            if (stateMachine.InputReader.JumpButtonPressed)
+            {
+                stateMachine.ForceReceiver.Reset();
+                stateMachine.WallRun.ResetWallJumpTime();                
+                stateMachine.SwitchState(new WallJumpState(stateMachine));
+                return;
+
+            }
         }
         else
         {
