@@ -4601,7 +4601,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh30008
+  m_Name: pb_Mesh30774
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -7989,7 +7989,7 @@ MonoBehaviour:
   maxWallRunTime: 0
   wallRunTimer: 0
   wallJumpForce: 15
-  wallJumpSideForce: 5
+  wallJumpSideForce: 2
   wallJumpForwardForce: 10
   lastJumpTime: 0
   inputReader: {fileID: 6814165339451037523}

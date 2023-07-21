@@ -62,6 +62,15 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Attack"",
+                    ""type"": ""Button"",
+                    ""id"": ""243de235-4d52-4ec7-b14f-8a8060aea68f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -251,6 +260,28 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""action"": ""Camera"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f794a038-7dc9-497d-8650-240b6bb4c78e"",
+                    ""path"": ""<Keyboard>/x"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mouse and Keyboard"",
+                    ""action"": ""Attack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f1081a50-084f-4e9d-9014-dc6a4b840ae6"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""GamePad"",
+                    ""action"": ""Attack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -291,6 +322,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
         m_Player_Modifier = m_Player.FindAction("Modifier", throwIfNotFound: true);
         m_Player_Camera = m_Player.FindAction("Camera", throwIfNotFound: true);
+        m_Player_Attack = m_Player.FindAction("Attack", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -356,6 +388,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Jump;
     private readonly InputAction m_Player_Modifier;
     private readonly InputAction m_Player_Camera;
+    private readonly InputAction m_Player_Attack;
     public struct PlayerActions
     {
         private @Controls m_Wrapper;
@@ -364,6 +397,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
         public InputAction @Modifier => m_Wrapper.m_Player_Modifier;
         public InputAction @Camera => m_Wrapper.m_Player_Camera;
+        public InputAction @Attack => m_Wrapper.m_Player_Attack;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -385,6 +419,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @Camera.started += instance.OnCamera;
             @Camera.performed += instance.OnCamera;
             @Camera.canceled += instance.OnCamera;
+            @Attack.started += instance.OnAttack;
+            @Attack.performed += instance.OnAttack;
+            @Attack.canceled += instance.OnAttack;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -401,6 +438,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @Camera.started -= instance.OnCamera;
             @Camera.performed -= instance.OnCamera;
             @Camera.canceled -= instance.OnCamera;
+            @Attack.started -= instance.OnAttack;
+            @Attack.performed -= instance.OnAttack;
+            @Attack.canceled -= instance.OnAttack;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -442,5 +482,6 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         void OnJump(InputAction.CallbackContext context);
         void OnModifier(InputAction.CallbackContext context);
         void OnCamera(InputAction.CallbackContext context);
+        void OnAttack(InputAction.CallbackContext context);
     }
 }
