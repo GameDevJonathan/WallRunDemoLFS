@@ -40,10 +40,16 @@ public class Grounded : PlayerBaseState
         {
             //Debug.Log("Grounded State:: input reader value: " + stateMachine.InputReader.Modified);
         }
+        
         Vector3 movement = CalculateMovement();
         Move(movement * freeLookMoveSpeed, deltaTime);
 
-
+        if (stateMachine.InputReader.AttackButtonPressed)
+        {
+            stateMachine.SwitchState(new AttackingState(stateMachine));
+            return;
+        }
+        
         if (stateMachine.InputReader.MovementValue == Vector2.zero)
         {
             stateMachine.Animator.SetFloat(FreeLookSpeedHash, 0, AnimatorDampTime, deltaTime);

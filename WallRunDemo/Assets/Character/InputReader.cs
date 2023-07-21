@@ -14,6 +14,7 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
     public bool Modified;
 
     public bool JumpButtonPressed => controls.Player.Jump.WasPressedThisFrame();
+    public bool AttackButtonPressed => controls.Player.Attack.WasPressedThisFrame();
 
     public event Action JumpEvent;
 
@@ -114,5 +115,10 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
         CinemachineCameraTarget.transform.rotation = Quaternion.Euler(_cinemachineTargetPitch + CameraAngleOverride,
             _cinemachineTargetYaw, 0.0f);
 
+    }
+
+    public void OnAttack(InputAction.CallbackContext context)
+    {
+        
     }
 }
