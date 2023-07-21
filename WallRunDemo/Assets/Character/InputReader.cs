@@ -17,8 +17,12 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
     public bool AttackButtonPressed => controls.Player.Attack.WasPressedThisFrame();
 
     public event Action JumpEvent;
+    public event Action AttackEvent;
 
 
+
+    [field:Header("Attacking")]
+    [field:SerializeField] public bool isAttacking { get; private set; }
     //camera    
     Transform cam;
 
@@ -119,6 +123,10 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
 
     public void OnAttack(InputAction.CallbackContext context)
     {
+        if (context.started)
+            isAttacking = true;
+        else if( context.canceled)
+            isAttacking = false;
         
     }
 }

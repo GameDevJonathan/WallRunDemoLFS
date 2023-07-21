@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -26,11 +27,19 @@ public class Grounded : PlayerBaseState
             stateMachine.Animator.CrossFadeInFixedTime(FreeLookBlendTreeHash, CrossFadeDuration);
         
         stateMachine.InputReader.JumpEvent += OnJump;
+        stateMachine.InputReader.JumpEvent += OnAttack;
 
     }
 
+  
     public override void Tick(float deltaTime)
     {
+
+        if (stateMachine.InputReader.isAttacking)
+        {
+            stateMachine.SwitchState(new PlayerAttackingState(stateMachine));
+            return;
+        }
 
         if (stateMachine.InputReader.Modified)
         {
@@ -39,8 +48,11 @@ public class Grounded : PlayerBaseState
         else
         {
             //Debug.Log("Grounded State:: input reader value: " + stateMachine.InputReader.Modified);
-        }
-        
+        }     
+
+
+
+
         Vector3 movement = CalculateMovement();
         Move(movement * freeLookMoveSpeed, deltaTime);
 
@@ -59,10 +71,13 @@ public class Grounded : PlayerBaseState
 
         stateMachine.Animator.SetFloat(FreeLookSpeedHash, freeLookValue, AnimatorDampTime, deltaTime);
         FaceMovement(movement, deltaTime);
-
-
-
     }
+
+    public void OnAttack()
+    {
+        stateMachine.SwitchState(new PlayerAttackingState(stateMachine));
+    }
+
 
     public void OnJump()
     {
@@ -72,6 +87,7 @@ public class Grounded : PlayerBaseState
     public override void Exit()
     {
         stateMachine.InputReader.JumpEvent -= OnJump;
+        stateMachine.InputReader.AttackEvent -= OnAttack;
 
     }
 
