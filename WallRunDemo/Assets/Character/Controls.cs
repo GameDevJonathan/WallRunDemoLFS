@@ -66,11 +66,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                 {
                     ""name"": ""Attack"",
                     ""type"": ""Button"",
-<<<<<<< HEAD
-                    ""id"": ""a703de0a-d5eb-4bfb-9dd5-27472a78edd9"",
-=======
                     ""id"": ""243de235-4d52-4ec7-b14f-8a8060aea68f"",
->>>>>>> 9675809620e9239a480d3c2df1c8fbe4bc9b00a1
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -205,7 +201,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/c"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Mouse and Keyboard"",
                     ""action"": ""Jump"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -216,7 +212,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""path"": ""<Gamepad>/buttonSouth"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""GamePad"",
                     ""action"": ""Jump"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -267,22 +263,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-<<<<<<< HEAD
-                    ""id"": ""0770ba2c-c788-4459-acf7-ecfec906769f"",
-                    ""path"": ""<Gamepad>/buttonWest"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""GamePad"",
-                    ""action"": ""Attack"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""ef02f5d4-74ec-4f5d-addd-5f3567e6f826"",
-=======
                     ""id"": ""f794a038-7dc9-497d-8650-240b6bb4c78e"",
->>>>>>> 9675809620e9239a480d3c2df1c8fbe4bc9b00a1
                     ""path"": ""<Keyboard>/x"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -290,8 +271,6 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""action"": ""Attack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
-<<<<<<< HEAD
-=======
                 },
                 {
                     ""name"": """",
@@ -303,7 +282,6 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""action"": ""Attack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
->>>>>>> 9675809620e9239a480d3c2df1c8fbe4bc9b00a1
                 }
             ]
         }

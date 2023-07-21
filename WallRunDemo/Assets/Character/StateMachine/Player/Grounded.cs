@@ -27,19 +27,16 @@ public class Grounded : PlayerBaseState
             stateMachine.Animator.CrossFadeInFixedTime(FreeLookBlendTreeHash, CrossFadeDuration);
         
         stateMachine.InputReader.JumpEvent += OnJump;
-        stateMachine.InputReader.JumpEvent += OnAttack;
+        stateMachine.InputReader.AttackEvent += OnAttack; 
+        
 
     }
 
   
     public override void Tick(float deltaTime)
     {
-
-        if (stateMachine.InputReader.isAttacking)
-        {
-            stateMachine.SwitchState(new PlayerAttackingState(stateMachine));
-            return;
-        }
+        
+        
 
         if (stateMachine.InputReader.Modified)
         {
@@ -56,11 +53,11 @@ public class Grounded : PlayerBaseState
         Vector3 movement = CalculateMovement();
         Move(movement * freeLookMoveSpeed, deltaTime);
 
-        if (stateMachine.InputReader.AttackButtonPressed)
-        {
-            stateMachine.SwitchState(new AttackingState(stateMachine));
-            return;
-        }
+        //if (stateMachine.InputReader.AttackButtonPressed)
+        //{
+        //    stateMachine.SwitchState(new AttackingState(stateMachine));
+        //    return;
+        //}
         
         if (stateMachine.InputReader.MovementValue == Vector2.zero)
         {
@@ -75,19 +72,22 @@ public class Grounded : PlayerBaseState
 
     public void OnAttack()
     {
-        stateMachine.SwitchState(new PlayerAttackingState(stateMachine));
+        stateMachine.SwitchState(new AttackingState(stateMachine,0));
+        return;
     }
 
 
     public void OnJump()
     {
         stateMachine.SwitchState(new PlayerJumpState(stateMachine));
+        return;
     }
 
     public override void Exit()
     {
         stateMachine.InputReader.JumpEvent -= OnJump;
         stateMachine.InputReader.AttackEvent -= OnAttack;
+        
 
     }
 

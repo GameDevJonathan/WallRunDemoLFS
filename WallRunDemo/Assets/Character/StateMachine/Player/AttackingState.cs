@@ -4,16 +4,21 @@ using UnityEngine;
 
 public class AttackingState : PlayerBaseState
 {
-    public AttackingState(PlayerStateMachine stateMachine) : base(stateMachine)
+    Attacks attack;
+    
+    public AttackingState(PlayerStateMachine stateMachine, int attackID) : base(stateMachine)
     {
+        attack = stateMachine.Attacks[attackID];
     }
 
     public override void Enter()
     {
+        Debug.Log(attack.AnimationName);
         
     }
     public override void Tick(float deltaTime)
     {
+        
         
     }
 

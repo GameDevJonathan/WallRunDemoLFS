@@ -7923,6 +7923,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Modified: 0
+  <isAttacking>k__BackingField: 0
   CinemachineCameraTarget: {fileID: 974987194}
   TopClamp: 70
   BottomClamp: -30
@@ -7963,6 +7964,8 @@ MonoBehaviour:
   <CharacterController>k__BackingField: {fileID: 6814165339451037521}
   <ForceReceiver>k__BackingField: {fileID: 6814165339451037524}
   <WallRun>k__BackingField: {fileID: 6814165339451037526}
+  <Attacks>k__BackingField:
+  - <AnimationName>k__BackingField: Attack1
   <FreeLookMovementSpeed>k__BackingField: 5
   <JumpForce>k__BackingField: 15
   <RotationSmoothValue>k__BackingField: 11

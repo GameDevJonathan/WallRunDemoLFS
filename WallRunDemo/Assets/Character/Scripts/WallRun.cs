@@ -42,7 +42,7 @@ public class WallRun : MonoBehaviour
 
     public void Start()
     {
-        Debug.Log(characterController.attachedRigidbody);  
+        
 
     }
 
