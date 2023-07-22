@@ -13,7 +13,7 @@ public class AttackingState : PlayerBaseState
 
     public override void Enter()
     {
-        Debug.Log(attack.AnimationName);
+        stateMachine.Animator.CrossFadeInFixedTime(attack.AnimationName,.1f);
         
     }
     public override void Tick(float deltaTime)
