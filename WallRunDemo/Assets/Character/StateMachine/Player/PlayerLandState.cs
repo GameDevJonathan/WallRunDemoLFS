@@ -8,6 +8,7 @@ public class PlayerLandState : PlayerBaseState
     private readonly int LandHash = Animator.StringToHash("JumpEnd");
     private readonly int RollingLandHash = Animator.StringToHash("LandingRoll");
     private const float CrossFadeDuration = 0.3f;
+    Vector3 Momentum;
 
     public PlayerLandState(PlayerStateMachine stateMachine, Vector2 inputMovement) : base(stateMachine)
     {
@@ -17,11 +18,13 @@ public class PlayerLandState : PlayerBaseState
 
     public override void Enter()
     {
+        //Momentum = new Vector3(0f, 0f, stateMachine.CharacterController.velocity.z*.7f);
         if (inputMovement != Vector2.zero) 
         {
             Debug.Log("Rolling Land");
             stateMachine.Animator.CrossFadeInFixedTime(RollingLandHash,0.01f);
             stateMachine.Animator.applyRootMotion = true;
+
         }
         else if (inputMovement == Vector2.zero)
         {
@@ -32,6 +35,7 @@ public class PlayerLandState : PlayerBaseState
 
     public override void Tick(float deltaTime)
     {
+        //Move(Momentum,deltaTime);
         //if (stateMachine.Animator.GetCurrentAnimatorStateInfo(0).IsName("LandingRoll"))
         //{
         //    Debug.Log("True");

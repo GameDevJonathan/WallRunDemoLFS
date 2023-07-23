@@ -123,12 +123,10 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
 
     public void OnAttack(InputAction.CallbackContext context)
     {
-        if(!context.started) {
-            isAttacking = false;
-                return; }
+        if(!context.started){return; }
         AttackEvent?.Invoke();
-        isAttacking = true;
-        Debug.Log("pressed");
+        
+        
         
     }
 }

@@ -7946,7 +7946,7 @@ MonoBehaviour:
   agent: {fileID: 0}
   drag: 0.3
   isGrounded: 0
-  fallSpeed: 5
+  fallSpeed: 30
 --- !u!114 &6814165339451037525
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7966,6 +7966,17 @@ MonoBehaviour:
   <WallRun>k__BackingField: {fileID: 6814165339451037526}
   <Attacks>k__BackingField:
   - <AnimationName>k__BackingField: Attack1
+    <TransitionDuration>k__BackingField: 0.1
+    <ComboStateIndex>k__BackingField: 1
+    <ComboAttackTime>k__BackingField: 0.5
+  - <AnimationName>k__BackingField: Attack2
+    <TransitionDuration>k__BackingField: 0.1
+    <ComboStateIndex>k__BackingField: 2
+    <ComboAttackTime>k__BackingField: 0.6
+  - <AnimationName>k__BackingField: Attack3
+    <TransitionDuration>k__BackingField: 0.2
+    <ComboStateIndex>k__BackingField: -1
+    <ComboAttackTime>k__BackingField: 1
   <FreeLookMovementSpeed>k__BackingField: 5
   <JumpForce>k__BackingField: 15
   <RotationSmoothValue>k__BackingField: 11
