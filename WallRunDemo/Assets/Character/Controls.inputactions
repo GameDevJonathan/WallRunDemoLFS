@@ -219,22 +219,22 @@
                 },
                 {
                     "name": "",
-                    "id": "f303ef7c-f771-4c2a-8995-0c88ad44756b",
-                    "path": "<Mouse>/delta",
+                    "id": "f10c1385-9fc4-461e-b796-0bebcc814285",
+                    "path": "<Gamepad>/rightStick",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "GamePad",
                     "action": "Camera",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "f10c1385-9fc4-461e-b796-0bebcc814285",
-                    "path": "<Gamepad>/rightStick",
+                    "id": "1eec48d0-9832-4557-be9f-9fb6d1147689",
+                    "path": "<Mouse>/delta",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Mouse and Keyboard",
                     "action": "Camera",
                     "isComposite": false,
                     "isPartOfComposite": false
